@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+    a{
+      color: white;
+      font-size: 20px;
+      font-family: sans-serif;
+    }
+    div {
+      width: 20%;
+      display: inline-block;
+    }
+    h1{
+      color: white;
+      font-family: sans-serif;
+    }
+
+
+    </style>
+  </head>
+  <body background="./images/star2nologo.jpg">
+    <h1 align="center">Choose Character</h1>
+
+    <div>
+
+      <a href="./battle.html?characterId=1">
+        <p> <img id="img_user_image" src="./images/babu.jpg" alt="" width="200px">
+          <br>
+          Babu Bhaiyya</p>
+      </a>
+    </div>
+    <div>
+      <a href="./battle.html?characterId=2">
+        <p><img id="img_user_image" src="./images/aladeen.jpg" alt="" width="200px">
+          <br>
+          Admiral General Aladeen</p>
+      </a>
+      </div>
+      <div>
+      <a href="./battle.html?characterId=3">
+        <p><img id="img_user_image" src="./images/chandler.jpg" alt="" width="200px">
+          <br>
+          Chandler Bing</p>
+      </a>
+      </div>
+      <div>
+      <a href="./battle.html?characterId=4">
+        <p><img id="img_user_image" src="./images/gormint.jpg" alt="" width="200px">
+          <br>
+          Gormint Aunty</p>
+      </a>
+      </div>
+      <div>
+      <a href="./battle.html?characterId=5">
+        <p><img id="img_user_image" src="./images/hermione.jpg" alt="" width="200px">
+          <br>
+          Hermione Granger</p>
+      </a>
+      </div>
+      <div>
+      <a href="./battle.html?characterId=6">
+        <p><img id="img_user_image" src="./images/barney.png" alt="" width="200px">
+          <br>
+          Barney Stinson</p>
+      </a>
+      </div>
+      <div>
+      <a href="./battle.html?characterId=7">
+        <p><img id="img_user_image" src="./images/joey.jpg" alt="" width="200px">
+          <br>
+          Joey Tribbiani</p>
+      </a>
+      </div>
+      <div>
+      <a href="./battle.html?characterId=8">
+        <p<img id="img_user_image" src="./images/roshesh.jpg" alt="" width="200px">
+          <br>
+          Rosesh Sarabhai</p>
+      </a>
+      </div>
+      <div>
+      <a href="./battle.html?characterId=9">
+        <p><img id="img_user_image" src="./images/sheldon.jpg" alt="" width="200px">
+          <br>
+          Sheldon Cooper</p>
+      </a>
+      </div>
+      <div>
+      <a href="./battle.html?characterId=10">
+        <p><img id="img_user_image" src="./images/trump.jpg" alt="" width="200px">
+          <br>
+          President Trump</p>
+      </a>
+</div>
+
+
+
+  </body>
+  <script type="text/javascript">
+  function getURLVariables() {
+      var vars = {};
+      console.log("Href is" + window.location.href);
+      var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        // console.log("M is: " + m);
+        // console.log("Key is: " + key);
+        // console.log("Value is: " + value);
+        vars[key] = value;
+      });
+    return vars;
+  }
+
+  var params = getURLVariables();
+  console.log(params);
+
+
+  </script>
+</html>

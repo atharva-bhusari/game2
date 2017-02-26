@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <style media="screen">
+      div {
+        width: 30%;
+        display: inline-block;
+      }
+      p{
+        color: white;
+        font-size: 18px;
+        font-family: sans-serif;
+
+      }
+      h1{
+        color: white;
+        font-family: sans-serif;
+
+      }
+      button{
+        padding: 18px;
+        background-color: red;
+        color: white;
+        font-family: sans-serif;
+      }
+
+    </style>
+  </head>
+  <body background="./images/star2nologo.jpg">
+    <h1>Battle</h1>
+
+    <!-- This div is the leftmost div. It is used to show the User's character -->
+    <div>
+      <p id="p_user"></p>
+      <img id="img_user_image" src="./images/babu.jpg" alt="" width="200px">
+      <p id="p_user_name">Character Name</p>
+      <progress id="progress_user" value="100" max="100">0%</progress>
+      <br>
+      <br>
+      <button id="button_user_attack" type="button" name="button" onclick="playMove(0)">Attack</button>
+      <br>
+      <br>
+      <button id="button_user_counter" type="button" name="button" onclick="playMove(1)">Counter Attack</button>
+      <br>
+      <br>
+      <button id="button_user_block" type="button" name="button" onclick="playMove(2)">Block</button>
+    </div>
+
+    <!-- This div is the middle div. It is used to show the game summary -->
+<div>
+  <button type="button" name="button" onclick="openNextPage()">Next</button>
+</div>
+    <!-- This is the right div. It is used to show the game summary -->
+    <div >
+      <p id = "p_cpu"></p>
+      <img id="cpuImage" src="./images/babu.jpg" alt="" width="200px">
+      <p id="p_cpu_name">Character Name</p>
+      <progress id="progress_cpu" value="100" max="100">0%</progress>
+      <br>
+      <br>
+      <button id="cpu_attack" type="button" name="button">Attack</button>
+      <br>
+      <br>
+      <button id="cpu_counter" type="button" name="button">Counter Attack</button>
+      <br>
+      <br>
+      <button id="cpu_bock"type="button" name="button">Block</button>
+    </div>
+
+  </body>
+
+  <!-- This is the javascript code that contains all character definitions. Do not touch it. -->
+  <script src="./characters.js" charset="utf-8"></script>
+
+  <!-- This script is where you will initialise the battle page.
+    The functions of this script are as follows:
+    1. Fetch html tags by using getElementById
+    2. Set the characterId by fetching it from the URL Parameters
+  -->
+  <script type="text/javascript">
+  function openNextPage() {
+    window.location.assign("./gameover.html");
+  }
+   // **********************************************************************************
+    // Do not edit code from this point till the next instruction
+
+    // Function to fetch query params
+    function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+          vars[key] = value;
+        });
+        return vars;
+    }
+
+    // find the user's character
+    var characterId = getUrlVars().characterId;
+        // You can edit the code below this part
+    // **********************************************************************************
+    for (var i = 0; i < characters.length; i++) {
+      if (characterId == characters[i].id) {
+        var userName =  document.getElementById('p_user_name');
+        var userImage = document.getElementById('img_user_image');
+        var userAttack = document.getElementById('button_user_attack');
+        var userCounter = document.getElementById('button_user_counter');
+        var userBlock = document.getElementById('button_user_block');
+
+        userName.innerHTML = characters[i].name;
+        userImage.src = characters[i].image;
+        userAttack.innerHTML = characters[i].attack;
+        userCounter.innerHTML = characters[i].counterAttack;
+        userBlock.innerHTML = characters[i].defense;
+      }
+
+    }
+
+    // Now that we have the characterId, Let us set the html tags
+
+    // Steps:
+
+    // 1. Write a for loop to iterate over the characters array
+    // Sample syntax:
+    // for (var i = 0; i < characters.length; i++) {
+    //
+    // }
+
+    // 2. Write an if statement to check the character with id == characterId
+    // Sample syntax:
+    // for (var i = 0; i < characters.length; i++) {
+    //   if (characters[i].id == characterId) {
+    //
+    //   }
+    // }
+
+    // 3. Set the html tag values according to the character
+    // Sample Syntax:
+    // for (var i = 0; i < characters.length; i++) {
+    //   if (characters[i].id == characterId) {
+    //     userName.innerHTML = characters[i].name;
+    //   }
+    // }
+
+    // CPU PLAYER SETUP SECTION
+    // ***************************************************
+    // To setup the CPU player, we need to choose a random
+    // character out of the 10 characters
+
+    // Sample syntax to choose a random player
+    // The line below provides a random id between 1 and 10
+      var cpuId = Math.floor((Math.random() * 10) + 1);
+
+    var cpuName =  document.getElementById('p_cpu_name');
+    var cpuImage = document.getElementById('cpuImage');
+    var cpuAttack = document.getElementById('cpu_attack');
+    var cpuCounter = document.getElementById('cpu_counter');
+    var cpuBlock = document.getElementById('cpu_block');
+
+    cpuName.innerHTML = characters[cpuId].name;
+    cpuImage.src = characters[cpuId].image;
+    cpuAttack.innerHTML = characters[cpuId].attack;
+    cpuCounter.innerHTML = characters[cpuId].counterAttack;
+    cpuBlock.innerHTML = characters[cpuId].defense;
+
+
+
+
+  </script>
+
+  <!-- This script tag contains the main game logic. -->
+  <script type="text/javascript">
+    var userHP=100, cpuHP=100;
+    function playMove(move) {
+      var userprogress = document.getElementById('progress_user');
+      var cpuprogress = document.getElementById('progress_cpu');
+      // We know the user's move.
+      // Now we need to generate a random move for the CPU
+
+      // Step 1: Generate a random move for the CPU
+      // Sample syntax to generate random move for the CPU
+       var user_move=move;
+       cpu_move=Math.floor((Math.random()*3)%3);
+
+      // Step 2: Calculate the HP Damage for User and CPU based on the two moves
+      //
+      // Rules:
+      // 1. if user_move == 0 and cpu_move == 0,
+      //   both lose 20 points
+      //
+      // 2. if user_move == 0 and cpu_move == 1,
+      //   user loses 30 points
+      //
+      // 3. if user_move == 0 and cpu_move == 2,
+      //   cpu loses 5 points
+      //
+      // 4. if user_move == 1 and cpu_move == 0,
+      //   cpu loses 30 points
+      //
+      // 5. if user_move == 1 and cpu_move == 1,
+      //   both lose 20 points
+      //
+      // 6. if user_move == 1 and cpu_move == 2,
+      //   user loses 10 points
+      //
+      // 7. if user_move == 2 and cpu_move == 0,
+      //   user loses 10 points
+      //
+      // 8. if user_move == 2 and cpu_move == 1,
+      //   cpu loses 10 points
+      if (user_move ==0  && cpu_move == 0) {
+        userHP= userHP - 20;
+        cpuHP = cpuHP - 20;
+      }else if (user_move ==0 && cpu_move ==1) {
+        userHP = userHP - 30;
+      }else if (user_move ==0 && cpu_move==2) {
+        cpuHP = cpuHP - 5;
+      }else if (user_move ==1 && cpu_move ==0) {
+        cpuHP = cpuHP - 30;
+        userHP = userHP - 20;
+      }else if (user_move ==1 && cpu_move ==1) {
+        cpuHp = cpuHP -20;
+       }else if (user_move ==1 && cpu_move ==2) {
+         userHP = userHP - 10;
+     }else if (user_move ==2 && cpu_move ==0) {
+         userHP = userHP - 10;
+      }else if (user_move ==2 && cpu_move ==1) {
+        cpuHP = cpuHP - 10;
+      }
+      userprogress.value=userHP;
+      cpuprogress.value=cpuHP;
+
+
+      // Step 3: Check if user or CPU has lost in this move.
+      // Logic: Check if hp of user or cpu is less than 0
+      // Sample syntax
+      // if (user_hp <= 0 || cpu_hp <= 0) {
+      //
+      // }
+if (userHP <=0 || cpuHP <= 0) {
+  //game over
+  if (userHP > 0 && cpuHP<=0) {
+    alert("User Wins")
+  }else if (userHP <=0 && cpuHP >0) {
+    alert("Cpu Wins")
+  }else {
+    alert("gameover")
+  }
+}
+      // Step 4: If a loss has occured, check who lost
+      // if user_hp <= 0 and cpu_hp > 0, user loses
+      // if user_hp >0 and cpu_hp <= 0, cpu loses
+      // else, it is a draw
+
+      // Step 5: If a loss has not occured, update the HP
+
+    }
+  </script>
+</html>
